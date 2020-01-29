@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class drag : MonoBehaviour
+public class ObjectDrag : MonoBehaviour
 {
     private bool selected = false;
     // Start is called before the first frame update
