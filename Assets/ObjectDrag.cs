@@ -11,13 +11,17 @@ public class ObjectDrag : MonoBehaviour
         
     }
 
+    public void SelectCard()
+    {
+        selected = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (selected && !Input.GetMouseButton(0))
         {
             selected = false;
-            print("Deselected");
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -29,7 +33,7 @@ public class ObjectDrag : MonoBehaviour
         if (selected)
         {
             float distance;
-            Plane plane = new Plane(Vector3.up, new Vector3(0, 2, 0));
+            Plane plane = new Plane(Vector3.up, new Vector3(0, 1.5f, 0));
             if (plane.Raycast(ray, out distance))
                 transform.position = ray.GetPoint(distance);
         }

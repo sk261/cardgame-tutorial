@@ -8,8 +8,7 @@ public class PlayerControls : MonoBehaviour
     public GameObject Card;
     private List<GameObject> Cards;
     /* TODO:
-     * Make draggable cards.
-     * Make drawable cards.
+     * Make drawable cards dragged
      * */
     // Start is called before the first frame update
     void Start()
@@ -20,9 +19,11 @@ public class PlayerControls : MonoBehaviour
     void DrawFromDeck()
     {
         GameObject NewCard = Instantiate(Card);
+        NewCard.GetComponent<Transform>().SetParent(transform);
+        NewCard.GetComponent<Transform>().localScale = Card.GetComponent<Transform>().localScale;
         NewCard.SetActive(true);
+        NewCard.GetComponent<ObjectDrag>().SelectCard(); 
         Cards.Add(NewCard);
-        print("Card drawn");
     }
 
     // Update is called once per frame
