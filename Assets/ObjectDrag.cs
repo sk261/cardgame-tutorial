@@ -40,10 +40,8 @@ public class ObjectDrag : MonoBehaviour
                     if (!x.isSpinning())
                         transform.eulerAngles = new Vector3(-45f, transform.eulerAngles.y, transform.eulerAngles.z);
                 }
-                else if (Input.GetMouseButton(0))
-                {
+                else
                     GetComponent<ObjectSpin>().StartSpin();
-                }
                 selected = Input.GetMouseButton(0) || Input.GetMouseButton(1);
             }
             else GetComponent<ObjectSpin>().EndSpin();
