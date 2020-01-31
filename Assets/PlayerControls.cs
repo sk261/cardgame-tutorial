@@ -19,8 +19,8 @@ public class PlayerControls : MonoBehaviour
     void DrawFromDeck()
     {
         GameObject NewCard = Instantiate(Card);
-        NewCard.GetComponent<Transform>().SetParent(transform);
-        NewCard.GetComponent<Transform>().localScale = Card.GetComponent<Transform>().localScale;
+        NewCard.GetComponent<Transform>().SetParent(Card.GetComponent<Transform>().parent.transform);
+        // NewCard.GetComponent<Transform>().localScale = Card.GetComponent<Transform>().localScale;
         NewCard.SetActive(true);
         NewCard.GetComponent<ObjectDrag>().SelectCard(); 
         Cards.Add(NewCard);
