@@ -8,7 +8,9 @@ public class GravityWell : MonoBehaviour
     public bool X;
     public bool Y, Z;
     public bool DisableSpin;
+    public float OuterPullPower = 0f;
     private List<Object> CaughtObjects;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -47,15 +49,26 @@ public class GravityWell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (GameObject n in CaughtObjects)
+        foreach (GameObject n in UnityEngine.Object.FindObjectsOfType<GameObject>())
         {
+            ObjectDrag x = null;
+            n.TryGetComponent<ObjectDrag>(out x);
+            if (x == null)
+                continue;
+
             Vector3 target = transform.position;
 
-            if (X) target.x = n.transform.position.x;
-            if (Y) target.y = n.transform.position.y;
-            if (Z) target.z = n.transform.position.z;
+            float power = OuterPullPower;
 
-            n.transform.position = Vector3.MoveTowards(n.transform.position, target, 10f*Time.deltaTime);
+            if (CaughtObjects.Contains(n))
+            {
+                if (X) target.x = n.transform.position.x;
+                if (Y) target.y = n.transform.position.y;
+                if (Z) target.z = n.transform.position.z;
+                power = 10f;
+            }
+
+            n.transform.position = Vector3.MoveTowards(n.transform.position, target, power * Time.deltaTime);
         }
     }
 }
