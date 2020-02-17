@@ -10,11 +10,17 @@ public class PlayerControls : MonoBehaviour
     private List<string> ValueCards;
     public Material faceUpMaterial;
     public Material faceDownMaterial;
+    public bool enableDeck = true;
     /* TODO:
      * Make drawable cards dragged
      * */
     // Start is called before the first frame update
     void Start()
+    {
+        resetDeck();
+    }
+
+    public void resetDeck()
     {
         ActiveCards = new List<GameObject>();
         ValueCards = new List<string>();
@@ -47,6 +53,17 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    public bool isActiveCard(GameObject card)
+    {
+        return ActiveCards.Contains(card);
+    }
+
+    public List<GameObject> getActiveCards()
+    {
+        return ActiveCards;
+    }
+
+
     public GameObject DrawFromDeck(bool Selected = true, bool FaceDown = false)
     {
         GameObject NewCard = Instantiate(Card);
@@ -66,7 +83,7 @@ public class PlayerControls : MonoBehaviour
         return NewCard;
     }
 
-    private void flipCard(GameObject card, bool FaceDown)
+    public void flipCard(GameObject card, bool FaceDown)
     {
         card.GetComponent<Transform>().GetChild(0).gameObject.SetActive(FaceDown == false);
         Material mat = faceUpMaterial;
@@ -91,7 +108,7 @@ public class PlayerControls : MonoBehaviour
             switch (hit.collider.name)
             {
                 case "Deck":
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0) && enableDeck)
                     {
                         DrawFromDeck();
                     }

@@ -48,7 +48,17 @@ public class GravityWell : MonoBehaviour
         ObjectDrag x = null;
         other.TryGetComponent<ObjectDrag>(out x);
         if (x != null)
-            CaughtObjects.Add(other.gameObject);
+        {
+            bool isCaught = false;
+            foreach (GravityWell n in UnityEngine.Object.FindObjectsOfType<GravityWell>())
+                if (n != this && n.CaughtObjects.Contains(x.gameObject) && n.GravityLock)
+                {
+                    isCaught = true;
+                    break;
+                }
+            if (!isCaught)
+                CaughtObjects.Add(other.gameObject);
+        }
     }
 
     private void moveCloser(GameObject n, bool forced = false)

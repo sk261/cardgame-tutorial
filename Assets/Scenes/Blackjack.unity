@@ -1462,7 +1462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &823126760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1892,7 +1892,8 @@ GameObject:
   - component: {fileID: 1083202100}
   - component: {fileID: 1083202102}
   - component: {fileID: 1083202101}
-  m_Layer: 5
+  - component: {fileID: 1083202103}
+  m_Layer: 0
   m_Name: ChipText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1981,6 +1982,27 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!223 &1083202103
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083202099}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1171868167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3009,6 +3031,7 @@ MonoBehaviour:
   Card: {fileID: 1973825827}
   faceUpMaterial: {fileID: 2100000, guid: a1b83869ca2d9744ebc01541969aa2e8, type: 2}
   faceDownMaterial: {fileID: 2100000, guid: e48023540cf208e4eab6fc7a04e86100, type: 2}
+  enableDeck: 1
 --- !u!1 &2084291394
 GameObject:
   m_ObjectHideFlags: 0

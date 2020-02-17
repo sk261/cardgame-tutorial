@@ -65,7 +65,18 @@ public class ObjectDrag : MonoBehaviour
                 }
                 else
                     GetComponent<ObjectSpin>().StartSpin();
-                selected = Input.GetMouseButton(0) || Input.GetMouseButton(1);
+
+                bool can_select = true;
+                foreach (ObjectDrag x in UnityEngine.Object.FindObjectsOfType<ObjectDrag>())
+                {
+                    if (x == this) continue;
+                    if (x.selected)
+                    {
+                        can_select = false;
+                        break;
+                    }
+                }
+                selected = can_select && (Input.GetMouseButton(0) || Input.GetMouseButton(1));
             }
             else GetComponent<ObjectSpin>().EndSpin();
         }
