@@ -6,6 +6,7 @@ public class ObjectDrag : MonoBehaviour
 {
     private bool selected = false;
     private Vector3 original_angles;
+    public bool selectable = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +18,31 @@ public class ObjectDrag : MonoBehaviour
         selected = true;
     }
 
+    public bool isDragging()
+    {
+        return selected;
+    }
+
+    public void Drop()
+    {
+        selectable = false;
+        StartCoroutine(enableReselection());
+    }
+
+    private IEnumerator enableReselection()
+    {
+        yield return new WaitForSeconds(.1f);
+        selectable = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (selectable == false)
+        {
+            selected = false;
+            return;
+        }
         if (transform.eulerAngles.x != original_angles.x)
             transform.eulerAngles = new Vector3(original_angles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         if (selected && !Input.GetMouseButton(0))

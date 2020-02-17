@@ -8,6 +8,8 @@ public class PlayerControls : MonoBehaviour
     public GameObject Card;
     private List<GameObject> ActiveCards;
     private List<string> ValueCards;
+    public Material faceUpMaterial;
+    public Material faceDownMaterial;
     /* TODO:
      * Make drawable cards dragged
      * */
@@ -45,7 +47,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    GameObject DrawFromDeck(bool Draggable = true)
+    public GameObject DrawFromDeck(bool Selected = true, bool FaceDown = false)
     {
         GameObject NewCard = Instantiate(Card);
 
@@ -53,11 +55,30 @@ public class PlayerControls : MonoBehaviour
         ValueCards.RemoveAt(0);
 
         NewCard.GetComponent<Transform>().SetParent(Card.GetComponent<Transform>().parent.transform);
-        NewCard.GetComponent<Transform>().GetChild(0).GetComponent<TextMesh>().text = value;
+        Transform text = NewCard.GetComponent<Transform>().GetChild(0);
+        text.GetComponent<TextMesh>().text = value;
+        NewCard.name = value;
+        flipCard(NewCard, FaceDown);
         NewCard.SetActive(true);
-        NewCard.GetComponent<ObjectDrag>().SelectCard();
+        if (Selected)
+            NewCard.GetComponent<ObjectDrag>().SelectCard();
         ActiveCards.Add(NewCard);
         return NewCard;
+    }
+
+    private void flipCard(GameObject card, bool FaceDown)
+    {
+        card.GetComponent<Transform>().GetChild(0).gameObject.SetActive(FaceDown == false);
+        Material mat = faceUpMaterial;
+        if (FaceDown)
+            mat = faceDownMaterial;
+
+        card.GetComponent<MeshRenderer>().material = mat;
+    }
+
+    public bool isCardFU(GameObject card)
+    {
+        return card.GetComponent<Transform>().GetChild(0).gameObject.activeSelf;
     }
 
     // Update is called once per frame

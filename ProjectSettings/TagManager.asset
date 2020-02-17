@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Coin1
+  - Coin5
   layers:
   - Default
   - TransparentFX
