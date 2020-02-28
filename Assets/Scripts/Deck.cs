@@ -3,17 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Deck
+public class Deck<Card>
 {
-
-    public static void test()
-    {
-        Deck test = new Deck();
-        for (int a = 0; a < 52; a++)
-            test.Add(new Card("V" + a.ToString()));
-        test.Shuffle();
-    }
-    protected LinkedList<Card> Cards { get; set; }
+    private LinkedList<Card> Cards { get; set; }
 	public Deck()
 	{
         Cards = new LinkedList<Card>();
@@ -41,7 +33,7 @@ public class Deck
         Cards.AddLast(card);
     }
 
-    public void Merge(Deck deck)
+    public void Merge(Deck<Card> deck)
     {
         LinkedList<Card> pull = deck.Cards;
         if (deck.Cards.Count > Cards.Count)
