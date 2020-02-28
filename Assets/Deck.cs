@@ -24,6 +24,36 @@ public class Deck
         Cards.AddLast(card);
     }
 
+    public Card drawFromTop()
+    {
+        return Remove();
+    }
+
+    public Card drawFromBottom()
+    {
+        Card bottom = Cards.First();
+        Cards.RemoveFirst();
+        return bottom;
+    }
+
+    public void AddToTop(Card card)
+    {
+        Cards.AddLast(card);
+    }
+
+    public void Merge(Deck deck)
+    {
+        LinkedList<Card> pull = deck.Cards;
+        if (deck.Cards.Count > Cards.Count)
+            pull = Cards;
+
+    }
+
+    public void AddToBottom(Card card)
+    {
+        Cards.AddFirst(card);
+    }
+
     public Card Remove()
     {
         Card top = Cards.Last();

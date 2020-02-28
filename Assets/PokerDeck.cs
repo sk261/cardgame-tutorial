@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PokerDeck : MonoBehaviour
+public class PokerDeck : Deck
 {
+    public Material cardBack;
     // Start is called before the first frame update
     void Start()
     {
