@@ -23,6 +23,10 @@ public class PokerCard : Card
             ret = Value.ToString() + ret;
         else
             ret = (new[] { "Ace", "Jack", "Queen", "King" })["+567".IndexOf((char)(Value+42))] + ret;
+        // ^^ This is my favourite line of code in the whole thing.
+        // It checks for the index of +567 by the ascii values of 43, 53, 54, and 55.
+        // Value is going to be either 1, 11, 12, or 13.
+        // It's my favourite thing of this whole project.
         return ret;
     }
 }
