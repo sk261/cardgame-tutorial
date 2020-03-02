@@ -11,6 +11,8 @@ public class Deck<Card>
         Cards = new LinkedList<Card>();
 	}
 
+    public int size { get { return Cards.Count; }  }
+
     public void Add(Card card)
     {
         Cards.AddLast(card);
@@ -18,7 +20,9 @@ public class Deck<Card>
 
     public Card drawFromTop()
     {
-        return Remove();
+        Card top = Cards.Last();
+        Cards.RemoveLast();
+        return top;
     }
 
     public Card drawFromBottom()
@@ -33,24 +37,15 @@ public class Deck<Card>
         Cards.AddLast(card);
     }
 
-    public void Merge(Deck<Card> deck)
-    {
-        LinkedList<Card> pull = deck.Cards;
-        if (deck.Cards.Count > Cards.Count)
-            pull = Cards;
-
-    }
-
     public void AddToBottom(Card card)
     {
         Cards.AddFirst(card);
     }
 
-    public Card Remove()
+    public void Merge(Deck<Card> deck)
     {
-        Card top = Cards.Last();
-        Cards.RemoveLast();
-        return top;
+        while (deck.size > 0)
+            AddToBottom(deck.drawFromTop());
     }
 
     public void Shuffle()
@@ -63,15 +58,21 @@ public class Deck<Card>
         while (Cards.Count > 0)
         {
             int pile = rand.Next(piles.Count);
-            if (pile % 2 == 0)
-                piles[pile].AddLast(Remove());
-            else
-                piles[pile].AddFirst(Remove());
+            bool top = (1 == rand.Next(0,2));
+            Card c;
+            if (top) c = drawFromTop();
+            else c = drawFromBottom();
+            if (pile % 2 == 0) piles[pile].AddLast(c);
+            else piles[pile].AddFirst(c);
         }
         while (piles.Count > 0)
         {
             int pile = rand.Next(piles.Count);
-            Cards.Union(piles[pile]);
+            while (piles[pile].Count > 0)
+            {
+                Cards.AddFirst(piles[pile].First.Value);
+                piles[pile].RemoveFirst();
+            }
             piles.RemoveAt(pile);
         }
         

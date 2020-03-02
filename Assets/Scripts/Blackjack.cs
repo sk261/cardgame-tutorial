@@ -49,7 +49,6 @@ public class Blackjack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Deck.test();
         resetGame();
 
     }
